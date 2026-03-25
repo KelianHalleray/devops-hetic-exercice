@@ -39,6 +39,10 @@ jobs:
       context: ./exercice-prometheus/starter-code/app
 
   security-scan:
+    permissions:
+      security-events: write   
+      contents: read
+      
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +75,7 @@ jobs:
           output: 'trivy-results.sarif'
 
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
