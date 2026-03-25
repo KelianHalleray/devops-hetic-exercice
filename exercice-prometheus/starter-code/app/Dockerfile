@@ -1,5 +1,8 @@
 FROM node:20.19.0-alpine3.21 AS test
 WORKDIR /app
+
+RUN npm install -g npm@10.9.7
+
 COPY package*.json ./
 RUN npm ci
 COPY src ./src
@@ -9,6 +12,9 @@ RUN npm test
 FROM node:20.19.0-alpine3.21 AS production
 WORKDIR /app
 ENV NODE_ENV=production
+
+RUN npm install -g npm@10.9.7
+
 COPY package*.json ./
 RUN npm ci --omit=dev
 COPY src ./src
