@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Scan dependencies
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           scan-type: 'fs'
           scan-ref: 'exercice-prometheus/starter-code/app/'
@@ -62,7 +62,7 @@ jobs:
         run: docker build -t devops-app:scan exercice-prometheus/starter-code/app/
 
       - name: Scan Docker image
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           image-ref: 'devops-app:scan'
           severity: 'HIGH,CRITICAL'
@@ -77,7 +77,7 @@ jobs:
           sarif_file: 'trivy-results.sarif'
 
       - name: Scan IaC
-        uses: aquasecurity/trivy-action@0.33.1
+        uses: aquasecurity/trivy-action@0.35.0
         with:
           scan-type: 'config'
           scan-ref: 'exercice-prometheus/starter-code/infra/'
